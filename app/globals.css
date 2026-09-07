@@ -24,3 +24,208 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* ==================== ANIMATION KEYFRAMES ==================== */
+
+/* Fade Up Animation - Requirements: 1.1, 1.2 */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Fade Left Animation - Requirements: 1.1, 1.2 */
+@keyframes fadeLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-left {
+  animation: fadeLeft 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Fade Right Animation - Requirements: 1.1, 1.2 */
+@keyframes fadeRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-fade-right {
+  animation: fadeRight 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Shimmer Loading Effect - Requirement: 4.5 */
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 50%,
+    #f0f0f0 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* ==================== HOVER EFFECTS ==================== */
+
+/* Hover Lift Effect - Requirements: 2.1, 2.2 */
+.hover-lift {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+}
+
+/* Hover Scale Effect - Requirement: 3.1 */
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+/* Image Zoom Effect - Requirements: 5.1, 5.2, 5.3 */
+.image-zoom-container {
+  overflow: hidden;
+}
+
+.image-zoom-container img {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-zoom-container:hover img {
+  transform: scale(1.05);
+}
+
+/* Smooth Scroll - Requirements: 8.1, 8.2 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scroll padding for fixed navbar - increased to account for navbar height */
+html {
+  scroll-padding-top: 120px;
+}
+
+/* ==================== ACCESSIBILITY - REDUCED MOTION ==================== */
+
+/* Disable animations for users who prefer reduced motion - Requirements: 11.1, 11.2, 11.3 */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Maintain hover state changes without transitions */
+  .hover-lift:hover,
+  .hover-scale:hover,
+  .image-zoom-container:hover img {
+    /* State changes still occur, just without animation */
+    transition: none;
+  }
+}
+
+/* ==================== BUTTON AND LINK HOVER EFFECTS ==================== */
+
+/* Button hover effects - Requirements: 3.1, 3.2 */
+button, .btn {
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover, .btn:hover {
+  transform: scale(1.05);
+}
+
+button:active, .btn:active {
+  transform: scale(0.95);
+}
+
+/* Link hover underline animation - Requirement: 3.3 */
+a {
+  position: relative;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Accordion border transition - Requirement: 2.4 */
+details summary {
+  transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Accordion arrow rotation - Requirement: 7.4 */
+/* Removed conflicting rule - using Tailwind's group-open:rotate-180 instead */
+
+/* Accordion expand/collapse animation - Requirements: 7.2, 7.3 */
+details {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==================== ACCORDION ANIMATIONS ==================== */
+
+/* Hide default details marker */
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Smooth accordion content slide-down animation */
+details[open] > *:not(summary) {
+  animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale effect on accordion click */
+details summary:active {
+  transform: scale(0.98);
+}
+
+/* Smooth overflow for accordion content */
+details > *:not(summary) {
+  overflow: hidden;
+}
