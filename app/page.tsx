@@ -29,8 +29,8 @@ export default function Home() {
   return (
     <div className="bg-slate-50 text-slate-900 font-sans selection:bg-indigo-500 selection:text-white">
       
-      {/* ================= TOP MODULE HEADER (Visible only when at top) ================= */}
-      <div className={`fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 border-b border-white/10 transition-all duration-500 ${
+      {/* ================= TOP MODULE HEADER (Visible only when at top on desktop, hidden on mobile) ================= */}
+      <div className={`hidden md:block fixed top-0 left-0 right-0 z-40 bg-gradient-to-r from-indigo-900 via-purple-900 to-slate-900 border-b border-white/10 transition-all duration-500 ${
         isScrolled ? 'opacity-0 -translate-y-full pointer-events-none' : 'opacity-100 translate-y-0'
       }`}>
         <div className="max-w-7xl mx-auto px-8 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
@@ -51,37 +51,39 @@ export default function Home() {
       </div>
 
       {/* ================= HERO SECTION ================= */}
-      <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ marginTop: isScrolled ? '0' : '120px' }}>
+      <section className="relative min-h-screen flex flex-col overflow-hidden" style={{ marginTop: isScrolled ? '0' : '0' }}>
         {/* Background Image with a Vibrant, Colorful Gradient Overlay to make text pop! */}
         <div className="absolute inset-0 bg-[url('/background.jpg')] bg-cover bg-center bg-no-repeat opacity-40 mix-blend-multiply"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-indigo-950/95 via-purple-900/80 to-slate-900/95"></div>
 
-        {/* Compact Navbar - Sticky with transparent/solid transition (appears on scroll) */}
-        <nav className={`sticky top-0 z-50 flex items-center justify-between px-8 py-4 w-full border-b transition-all duration-300 ${
+        {/* Compact Navbar - Sticky, clean on mobile */}
+        <nav className={`sticky top-0 z-50 w-full border-b transition-all duration-300 ${
           isScrolled 
             ? 'border-white/10 backdrop-blur-md bg-slate-900/95 shadow-lg' 
-            : 'border-white/10 backdrop-blur-sm bg-transparent'
+            : 'border-white/10 backdrop-blur-md bg-slate-900/90'
         }`}>
-          <div className="flex flex-col gap-0.5">
-            <span className="text-[9px] tracking-[0.2em] text-indigo-300 uppercase font-bold">Module 9 • GEE001B</span>
-            <span className="text-base font-bold tracking-wide text-white">Gender & Society Forum</span>
+          <div className="max-w-7xl mx-auto px-4 md:px-8 py-3 md:py-4 flex items-center justify-between">
+            <div className="flex flex-col gap-0">
+              <span className="text-[8px] md:text-[9px] tracking-[0.15em] md:tracking-[0.2em] text-indigo-300 uppercase font-bold">Module 9 • GEE1B</span>
+              <span className="text-sm md:text-base font-bold tracking-wide text-white">Gender & Society</span>
+            </div>
+
+            <ul className="hidden xl:flex items-center gap-8 text-[13px] font-bold tracking-wide text-white/80">
+              <li><a href="#overview" className="text-white hover:text-rose-300 transition">Overview</a></li>
+              <li><a href="#law-explorer" className="hover:text-rose-300 transition">Law Explorer</a></li>
+              <li><a href="#reality-law" className="hover:text-rose-300 transition">Reality vs. Law</a></li>
+              <li><a href="#case-deck" className="hover:text-rose-300 transition">Case Deck</a></li>
+              <li><a href="#references" className="hover:text-rose-300 transition">References</a></li>
+            </ul>
+
+            <button 
+              onClick={() => setIsModalOpen(true)}
+              className="hidden md:flex items-center gap-2 bg-gradient-to-r from-rose-500 to-indigo-600 px-4 md:px-6 py-2 md:py-2.5 text-xs md:text-[13px] font-bold text-white hover:shadow-lg hover:shadow-rose-500/30 transition-all rounded-full"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+              <span className="hidden md:inline">Join Discussion</span>
+            </button>
           </div>
-
-          <ul className="hidden xl:flex items-center gap-8 text-[13px] font-bold tracking-wide text-white/80">
-            <li><a href="#overview" className="text-white hover:text-rose-300 transition">Overview</a></li>
-            <li><a href="#law-explorer" className="hover:text-rose-300 transition">Law Explorer</a></li>
-            <li><a href="#reality-law" className="hover:text-rose-300 transition">Reality vs. Law</a></li>
-            <li><a href="#case-deck" className="hover:text-rose-300 transition">Case Deck</a></li>
-            <li><a href="#references" className="hover:text-rose-300 transition">References</a></li>
-          </ul>
-
-          <button 
-            onClick={() => setIsModalOpen(true)}
-            className="hidden md:flex items-center gap-2 bg-gradient-to-r from-rose-500 to-indigo-600 px-6 py-2.5 text-[13px] font-bold text-white hover:shadow-lg hover:shadow-rose-500/30 transition-all rounded-full"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-            Join Discussion
-          </button>
         </nav>
 
         {/* Hero Title Area - Animated */}
